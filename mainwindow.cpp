@@ -12,3 +12,13 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+void MainWindow::setController(Controller *controller)
+{
+    this->controller = controller;
+}
+
+void MainWindow::on_actionQuit_triggered()
+{
+    this->close();
+}
