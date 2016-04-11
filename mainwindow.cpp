@@ -18,3 +18,8 @@ void MainWindow::on_actionQuit_triggered()
 {
     this->close();
 }
+
+void MainWindow::on_tableView_clicked(const QModelIndex &index)
+{
+    controller.placeObject(index.column(), index.row());
+}

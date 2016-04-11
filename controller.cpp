@@ -1,6 +1,6 @@
 #include "controller.h"
 
-Controller::Controller()
+Controller::Controller() : board(11, 11)
 {
 
 }
@@ -8,4 +8,9 @@ Controller::Controller()
 TicTacToeTableModel *Controller::getDataModel()
 {
     return &(this->dataModel);
+}
+
+void Controller::placeObject(int positionX, int positionY)
+{
+
 }

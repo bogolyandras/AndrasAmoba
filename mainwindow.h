@@ -20,6 +20,8 @@ public:
 private slots:
     void on_actionQuit_triggered();
 
+    void on_tableView_clicked(const QModelIndex &index);
+
 private:
     Ui::MainWindow *ui;
     Controller controller;

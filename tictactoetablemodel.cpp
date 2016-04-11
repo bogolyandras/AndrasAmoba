@@ -1,3 +1,4 @@
+#include <QPixmap>
 #include "tictactoetablemodel.h"
 
 TicTacToeTableModel::TicTacToeTableModel(QObject *parent)
@@ -7,6 +8,9 @@ TicTacToeTableModel::TicTacToeTableModel(QObject *parent)
     sizeX = 11;
     sizeY = 11;
     BoardData = new char[sizeX * sizeY];
+    for (int i = 0; i < sizeX * sizeY; ++i) {
+        BoardData[i] = 0;
+    }
 }
 
 TicTacToeTableModel::~TicTacToeTableModel()
@@ -28,10 +32,13 @@ int TicTacToeTableModel::columnCount(const QModelIndex &parent) const
 
 QVariant TicTacToeTableModel::data(const QModelIndex &index, int role) const
 {
-    Q_UNUSED(role);
     if (!index.isValid())
         return QVariant();
-
-    // FIXME: Implement me!
+    if (role == Qt::DecorationRole) {
+        if (index.row() == 5 && index.column() == 5)
+            return QPixmap(":/x.png");
+        if (index.row() == 6 && index.column() == 7)
+            return QPixmap(":/o.png");
+    }
     return QVariant();
 }

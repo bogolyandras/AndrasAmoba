@@ -15,11 +15,13 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     controller.cpp \
-    tictactoetablemodel.cpp
+    tictactoetablemodel.cpp \
+    board.cpp
 
 HEADERS  += mainwindow.h \
     controller.h \
-    tictactoetablemodel.h
+    tictactoetablemodel.h \
+    board.h
 
 FORMS    += mainwindow.ui
 
