@@ -57,12 +57,18 @@ Field* Board::translateForPlayer2()
 
 bool Board::placeForPlayer1(Position pos)
 {
-    BoardData[Position::TranslatePosition(pos, sizeX, sizeY)] = Field::O;
-    return true;
+    if (BoardData[Position::TranslatePosition(pos, sizeX, sizeY)] == Field::Empty) {
+        BoardData[Position::TranslatePosition(pos, sizeX, sizeY)] = Field::O;
+        return true;
+    }
+    return false;
 }
 
 bool Board::placeForPlayer2(Position pos)
 {
-    BoardData[Position::TranslatePosition(pos, sizeX, sizeY)] = Field::X;
-    return true;
+    if (BoardData[Position::TranslatePosition(pos, sizeX, sizeY)] == Field::Empty) {
+        BoardData[Position::TranslatePosition(pos, sizeX, sizeY)] = Field::X;
+        return true;
+    }
+    return false;
 }

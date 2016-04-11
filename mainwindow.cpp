@@ -28,7 +28,10 @@ void MainWindow::on_tableView_clicked(const QModelIndex &index)
         //msgBox.setText("Igen: " + QString::number(index.column()) + " " + QString::number(index.row()));
         //msgBox.exec();
         Position p(index.column(), index.row());
-        controller.placeObject(p);
+        Position lastMove = controller.placeObject(p);
+        ui->tableView->clearSelection();
+        ui->tableView->selectionModel()->select(
+                    ui->tableView->model()->index(lastMove.Y, lastMove.X), QItemSelectionModel::Select);
 
     }
 }

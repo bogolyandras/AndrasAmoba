@@ -12,7 +12,7 @@ public:
     Controller();
     ~Controller();
     TicTacToeTableModel* getDataModel();
-    void placeObject(Position pos);
+    Position placeObject(Position pos);
 private:
     TicTacToeTableModel dataModel;
     Board board;
