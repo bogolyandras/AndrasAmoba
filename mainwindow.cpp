@@ -6,16 +6,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->tableView->setModel(controller.getDataModel());
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
-}
-
-void MainWindow::setController(Controller *controller)
-{
-    this->controller = controller;
 }
 
 void MainWindow::on_actionQuit_triggered()
