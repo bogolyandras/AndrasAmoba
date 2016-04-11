@@ -9,6 +9,7 @@ class TicTacToeTableModel : public QAbstractTableModel
 
 public:
     explicit TicTacToeTableModel(QObject *parent = 0);
+    ~TicTacToeTableModel();
 
     // Basic functionality:
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
@@ -17,6 +18,9 @@ public:
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
 private:
+    char* BoardData;
+    int sizeX;
+    int sizeY;
 };
 
 #endif // TICTACTOETABLEMODEL_H

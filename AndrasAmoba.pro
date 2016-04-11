@@ -22,3 +22,6 @@ HEADERS  += mainwindow.h \
     tictactoetablemodel.h
 
 FORMS    += mainwindow.ui
+
+RESOURCES += \
+    andrasamoba.qrc
