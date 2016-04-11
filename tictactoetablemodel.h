@@ -2,6 +2,7 @@
 #define TICTACTOETABLEMODEL_H
 
 #include <QAbstractTableModel>
+#include "field.h"
 
 class TicTacToeTableModel : public QAbstractTableModel
 {
@@ -16,10 +17,10 @@ public:
     int columnCount(const QModelIndex &parent = QModelIndex()) const override;
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
-    void loadData(char* data, int sizeX, int sizeY);
+    void loadData(Field* data, int sizeX, int sizeY);
 
 private:
-    char* BoardData;
+    Field* BoardData;
     int sizeX;
     int sizeY;
 };

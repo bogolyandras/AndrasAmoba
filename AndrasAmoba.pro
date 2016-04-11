@@ -21,7 +21,8 @@ SOURCES += main.cpp\
 HEADERS  += mainwindow.h \
     controller.h \
     tictactoetablemodel.h \
-    board.h
+    board.h \
+    field.h
 
 FORMS    += mainwindow.ui
 

@@ -7,9 +7,9 @@ TicTacToeTableModel::TicTacToeTableModel(QObject *parent)
     Q_UNUSED(parent);
     sizeX = 0;
     sizeY = 0;
-    BoardData = new char[sizeX * sizeY];
+    BoardData = new Field[sizeX * sizeY];
     for (int i = 0; i < sizeX * sizeY; ++i) {
-        BoardData[i] = 0;
+        BoardData[i] = Field::Empty;
     }
 }
 
@@ -35,18 +35,24 @@ QVariant TicTacToeTableModel::data(const QModelIndex &index, int role) const
     if (!index.isValid())
         return QVariant();
     if (role == Qt::DecorationRole) {
-        if (index.row() == 5 && index.column() == 5)
+        switch (BoardData[index.column() * sizeX + index.row()])
+        {
+        case Field::X:
             return QPixmap(":/x.png");
-        if (index.row() == 6 && index.column() == 7)
+        case Field::O:
             return QPixmap(":/o.png");
+        }
     }
     return QVariant();
 }
 
-void TicTacToeTableModel::loadData(char *data, int sizeX, int sizeY)
+void TicTacToeTableModel::loadData(Field* data, int sizeX, int sizeY)
 {
     delete[] BoardData;
-    BoardData = new char[sizeX * sizeY];
+    BoardData = new Field[sizeX * sizeY];
     this->sizeX = sizeX;
     this->sizeY = sizeY;
+    for (int i = 0; i < sizeX * sizeY; ++i) {
+        BoardData[i] = data[i];
+    }
 }

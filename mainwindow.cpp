@@ -21,5 +21,6 @@ void MainWindow::on_actionQuit_triggered()
 
 void MainWindow::on_tableView_clicked(const QModelIndex &index)
 {
-    controller.placeObject(index.column(), index.row());
+    if(index.isValid())
+        controller.placeObject(index.column(), index.row());
 }

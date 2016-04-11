@@ -1,6 +1,6 @@
 #ifndef BOARD_H
 #define BOARD_H
-
+#include "field.h"
 
 class Board
 {
@@ -9,8 +9,9 @@ public:
     ~Board();
     int getSizeX() const;
     int getSizeY() const;
+    Field* translateForPlayer1();
 private:
-    char* BoardData;
+    Field* BoardData;
     int sizeX;
     int sizeY;
 };
