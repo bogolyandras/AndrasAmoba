@@ -35,7 +35,7 @@ QVariant TicTacToeTableModel::data(const QModelIndex &index, int role) const
     if (!index.isValid())
         return QVariant();
     if (role == Qt::DecorationRole) {
-        switch (BoardData[index.column() * sizeX + index.row()])
+        switch (BoardData[index.row() * sizeX + index.column()])
         {
         case Field::X:
             return QPixmap(":/x.png");
@@ -48,6 +48,7 @@ QVariant TicTacToeTableModel::data(const QModelIndex &index, int role) const
 
 void TicTacToeTableModel::loadData(Field* data, int sizeX, int sizeY)
 {
+    layoutAboutToBeChanged();
     delete[] BoardData;
     BoardData = new Field[sizeX * sizeY];
     this->sizeX = sizeX;
@@ -55,4 +56,5 @@ void TicTacToeTableModel::loadData(Field* data, int sizeX, int sizeY)
     for (int i = 0; i < sizeX * sizeY; ++i) {
         BoardData[i] = data[i];
     }
+    layoutChanged();
 }

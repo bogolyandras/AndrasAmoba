@@ -1,5 +1,7 @@
+#include <QMessageBox>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "position.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -21,6 +23,12 @@ void MainWindow::on_actionQuit_triggered()
 
 void MainWindow::on_tableView_clicked(const QModelIndex &index)
 {
-    if(index.isValid())
-        controller.placeObject(index.column(), index.row());
+    if(index.isValid()) {
+        //QMessageBox msgBox;
+        //msgBox.setText("Igen: " + QString::number(index.column()) + " " + QString::number(index.row()));
+        //msgBox.exec();
+        Position p(index.column(), index.row());
+        controller.placeObject(p);
+
+    }
 }

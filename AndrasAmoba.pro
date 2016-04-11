@@ -16,13 +16,19 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     controller.cpp \
     tictactoetablemodel.cpp \
-    board.cpp
+    board.cpp \
+    randomaiplayer.cpp \
+    aiplayer.cpp \
+    position.cpp
 
 HEADERS  += mainwindow.h \
     controller.h \
     tictactoetablemodel.h \
     board.h \
-    field.h
+    field.h \
+    randomaiplayer.h \
+    aiplayer.h \
+    position.h
 
 FORMS    += mainwindow.ui
 
