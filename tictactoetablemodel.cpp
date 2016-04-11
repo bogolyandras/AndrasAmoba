@@ -5,8 +5,8 @@ TicTacToeTableModel::TicTacToeTableModel(QObject *parent)
     : QAbstractTableModel(parent)
 {
     Q_UNUSED(parent);
-    sizeX = 11;
-    sizeY = 11;
+    sizeX = 0;
+    sizeY = 0;
     BoardData = new char[sizeX * sizeY];
     for (int i = 0; i < sizeX * sizeY; ++i) {
         BoardData[i] = 0;
@@ -41,4 +41,12 @@ QVariant TicTacToeTableModel::data(const QModelIndex &index, int role) const
             return QPixmap(":/o.png");
     }
     return QVariant();
+}
+
+void TicTacToeTableModel::loadData(char *data, int sizeX, int sizeY)
+{
+    delete[] BoardData;
+    BoardData = new char[sizeX * sizeY];
+    this->sizeX = sizeX;
+    this->sizeY = sizeY;
 }

@@ -16,6 +16,7 @@ public:
     int columnCount(const QModelIndex &parent = QModelIndex()) const override;
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+    void loadData(char* data, int sizeX, int sizeY);
 
 private:
     char* BoardData;
