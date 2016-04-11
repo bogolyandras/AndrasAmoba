@@ -14,3 +14,8 @@ int Position::TranslatePosition(Position pos, int sizeX, int sizeY)
 {
     return pos.Y * sizeX + pos.X;
 }
+
+Position Position::TranslatePosition(int i, int sizeX, int sizeY)
+{
+    return Position(i % sizeX, i / sizeX);
+}

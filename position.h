@@ -9,6 +9,7 @@ public:
     Position(int X, int Y);
     int X, Y;
     static int TranslatePosition(Position pos, int sizeX, int sizeY);
+    static Position TranslatePosition(int i, int sizeX, int sizeY);
 };
 
 #endif // POSITION_H

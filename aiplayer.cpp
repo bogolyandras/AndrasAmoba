@@ -4,3 +4,8 @@ AiPlayer::AiPlayer()
 {
 
 }
+
+AiPlayer::~AiPlayer()
+{
+
+}

@@ -10,6 +10,7 @@ class Controller
 {
 public:
     Controller();
+    ~Controller();
     TicTacToeTableModel* getDataModel();
     void placeObject(Position pos);
 private:
