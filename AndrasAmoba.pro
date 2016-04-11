@@ -1,18 +1,20 @@
+#-------------------------------------------------
+#
+# Project created by QtCreator 2016-04-11T09:07:46
+#
+#-------------------------------------------------
+
+QT       += core gui
+
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
+TARGET = AndrasAmoba
 TEMPLATE = app
 
-QT += qml quick
-CONFIG += c++11
 
-SOURCES += main.cpp \
-    board.cpp
+SOURCES += main.cpp\
+        mainwindow.cpp
 
-RESOURCES += qml.qrc
+HEADERS  += mainwindow.h
 
-# Additional import path used to resolve QML modules in Qt Creator's code model
-QML_IMPORT_PATH =
-
-# Default rules for deployment.
-include(deployment.pri)
-
-HEADERS += \
-    board.h
+FORMS    += mainwindow.ui
