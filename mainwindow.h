@@ -22,6 +22,10 @@ private slots:
 
     void on_tableView_clicked(const QModelIndex &index);
 
+    void on_actionNew_game_triggered();
+
+    void on_actionAbout_triggered();
+
 private:
     Ui::MainWindow *ui;
     Controller controller;

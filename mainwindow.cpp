@@ -24,9 +24,6 @@ void MainWindow::on_actionQuit_triggered()
 void MainWindow::on_tableView_clicked(const QModelIndex &index)
 {
     if(index.isValid()) {
-        //QMessageBox msgBox;
-        //msgBox.setText("Igen: " + QString::number(index.column()) + " " + QString::number(index.row()));
-        //msgBox.exec();
         Position p(index.column(), index.row());
         Position lastMove = controller.placeObject(p);
         ui->tableView->clearSelection();
@@ -34,4 +31,17 @@ void MainWindow::on_tableView_clicked(const QModelIndex &index)
                     ui->tableView->model()->index(lastMove.Y, lastMove.X), QItemSelectionModel::Select);
 
     }
+}
+
+void MainWindow::on_actionNew_game_triggered()
+{
+    controller.reset();
+}
+
+void MainWindow::on_actionAbout_triggered()
+{
+    QMessageBox msgBox;
+    msgBox.setWindowTitle("About Tic Tac Toe");
+    msgBox.setText("Copyright © 2016\nAndrás Bögöly \nSome rights reserved, see LICENSE.md");
+    msgBox.exec();
 }

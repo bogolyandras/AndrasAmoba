@@ -15,6 +15,17 @@ Board::~Board()
     delete[] BoardData;
 }
 
+void Board::createNew(int sizeX, int sizeY)
+{
+    delete[] BoardData;
+    this->sizeX = sizeX;
+    this->sizeY = sizeY;
+    BoardData = new Field[sizeX * sizeY];
+    for (int i = 0; i < sizeX * sizeY; ++i) {
+        BoardData[i] = Field::Empty;
+    }
+}
+
 int Board::getSizeX() const
 {
     return sizeX;

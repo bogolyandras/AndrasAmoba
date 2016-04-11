@@ -14,6 +14,14 @@ Controller::~Controller()
     delete ai;
 }
 
+void Controller::reset()
+{
+    board.createNew(35, 25);
+    Field* data = board.translateForPlayer1();
+    dataModel.loadData(data, board.getSizeX(), board.getSizeY());
+    delete[] data;
+}
+
 TicTacToeTableModel *Controller::getDataModel()
 {
     return &(this->dataModel);

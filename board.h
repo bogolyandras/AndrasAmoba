@@ -8,6 +8,7 @@ class Board
 public:
     Board(int sizeX, int sizeY);
     ~Board();
+    void createNew(int sizeX, int sizeY);
     int getSizeX() const;
     int getSizeY() const;
     Field* translateForPlayer1();

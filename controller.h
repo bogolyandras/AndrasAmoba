@@ -13,6 +13,7 @@ public:
     ~Controller();
     TicTacToeTableModel* getDataModel();
     Position placeObject(Position pos);
+    void reset();
 private:
     TicTacToeTableModel dataModel;
     Board board;
