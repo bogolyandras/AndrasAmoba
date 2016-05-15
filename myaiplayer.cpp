@@ -1,6 +1,16 @@
 #include "myaiplayer.h"
 
-myaiplayer::myaiplayer()
+MyaAiPlayer::MyaAiPlayer()
+{
+
+}
+
+MyaAiPlayer::~MyaAiPlayer()
+{
+
+}
+
+Position MyaAiPlayer::place(Field *board, int sizeX, int sizeY)
 {
 
 }
