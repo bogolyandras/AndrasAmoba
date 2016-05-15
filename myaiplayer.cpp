@@ -21,8 +21,8 @@ Position MyAiPlayer::place(Field *board, int sizeX, int sizeY)
 
     std::vector<Advantage> PlacementAdvantages;
 
-    Threat StartOpponentThreat = getThreatForPlayer(Field::X);
-    Threat StartPlayerThreat = getThreatForPlayer(Field::O);
+    Threat StartOpponentThreat = getThreatForPlayer(Field::O);
+    Threat StartPlayerThreat = getThreatForPlayer(Field::X);
 
     //Iterate over all possible steps
     for (int i = 0; i < sizeX * sizeY; ++i) {
@@ -33,12 +33,12 @@ Position MyAiPlayer::place(Field *board, int sizeX, int sizeY)
             continue;
 
         //Place our mark here
-        BoardData[i] = Field::O;
+        BoardData[i] = Field::X;
 
         //Count the advantage the step
         Advantage a(p,
-                    StartOpponentThreat - getThreatForPlayer(Field::X),
-                    getThreatForPlayer(Field::O) - StartPlayerThreat);
+                    StartOpponentThreat - getThreatForPlayer(Field::O),
+                    getThreatForPlayer(Field::X) - StartPlayerThreat);
         PlacementAdvantages.push_back(a);
 
         //Remove the placement
@@ -158,7 +158,6 @@ Threat MyAiPlayer::getThreatForPlayer(Field lookingFor)
                 PossibilitiesLeftBottom[i] = ThreatCount;
             }
         }
-
     }
 
     Threat threats;
