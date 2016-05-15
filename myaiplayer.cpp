@@ -55,7 +55,7 @@ Threat MyAiPlayer::getThreatForPlayer(Field lookingFor)
 {
     unsigned char PossibilitiesRight[sizeX * sizeY];
     unsigned char PossibilitiesRightBottom[sizeX * sizeY];
-    unsigned char PossibilitiesLeft[sizeX * sizeY];
+    unsigned char PossibilitiesBottom[sizeX * sizeY];
     unsigned char PossibilitiesLeftBottom[sizeX * sizeY];
 
     for (int i = 0; i < sizeX * sizeY; ++i) {
@@ -85,9 +85,79 @@ Threat MyAiPlayer::getThreatForPlayer(Field lookingFor)
             PossibilitiesRight[i] = ThreatCount;
         }
 
+        /*
+         * X
+         *  X
+         *   X
+         *    X
+         *     X
+         */
         PossibilitiesRightBottom[i] = 0;
-        PossibilitiesLeft[i] = 0;
+        if (p.X + 4 < sizeX && p.Y + 4 < sizeY) {
+            int ThreatCount = 1;
+            for (int j = 0; j < 5; ++j) {
+                Position p2 = p;
+                p2.X += j;
+                p2.Y += j;
+                Field currentField = BoardData[Position::TranslatePosition(p2, sizeX, sizeY)];
+                if (currentField == lookingFor) {
+                    ThreatCount++;
+                } else if(currentField != Field::Empty) {
+                    ThreatCount = 0;
+                    break;
+                }
+                PossibilitiesRightBottom[i] = ThreatCount;
+            }
+        }
+
+        /*
+         * X
+         * X
+         * X
+         * X
+         * X
+         */
+        PossibilitiesBottom[i] = 0;
+        if (p.Y + 4 < sizeY) {
+            int ThreatCount = 1;
+            for (int j = 0; j < 5; ++j) {
+                Position p2 = p;
+                p2.Y += j;
+                Field currentField = BoardData[Position::TranslatePosition(p2, sizeX, sizeY)];
+                if (currentField == lookingFor) {
+                    ThreatCount++;
+                } else if(currentField != Field::Empty) {
+                    ThreatCount = 0;
+                    break;
+                }
+                PossibilitiesBottom[i] = ThreatCount;
+            }
+        }
+
+        /*
+         *     X
+         *    X
+         *   X
+         *  X
+         * X
+         */
         PossibilitiesLeftBottom[i] = 0;
+        if (p.X - 4 >= 0 && p.Y + 4 < sizeY) {
+            int ThreatCount = 1;
+            for (int j = 0; j < 5; ++j) {
+                Position p2 = p;
+                p2.X -= j;
+                p2.Y += j;
+                Field currentField = BoardData[Position::TranslatePosition(p2, sizeX, sizeY)];
+                if (currentField == lookingFor) {
+                    ThreatCount++;
+                } else if(currentField != Field::Empty) {
+                    ThreatCount = 0;
+                    break;
+                }
+                PossibilitiesLeftBottom[i] = ThreatCount;
+            }
+        }
 
     }
 
@@ -126,7 +196,7 @@ Threat MyAiPlayer::getThreatForPlayer(Field lookingFor)
             threats.Threat0++;
             break;
         }
-        switch (PossibilitiesLeft[i])
+        switch (PossibilitiesBottom[i])
         {
         case 6:
             threats.Threat5++;
