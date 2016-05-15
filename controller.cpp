@@ -1,10 +1,12 @@
 #include "controller.h"
 #include "randomaiplayer.h"
+#include "myaiplayer.h"
 
 Controller::Controller() :
     board(35, 25), lastMoveExists(false), lastMove(0, 0)
 {
-    ai = new RandomAIPlayer();
+    //ai = new RandomAIPlayer();
+    ai = new MyAiPlayer();
     Field* data = board.translateForPlayer1();
     dataModel.loadData(data, board.getSizeX(), board.getSizeY());
     delete[] data;

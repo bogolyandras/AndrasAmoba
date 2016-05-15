@@ -3,17 +3,17 @@
 #include "myaiplayer.h"
 
 
-MyaAiPlayer::MyaAiPlayer() : sizeX(0), sizeY(0), BoardData(nullptr)
+MyAiPlayer::MyAiPlayer() : sizeX(0), sizeY(0), BoardData(nullptr)
 {
 
 }
 
-MyaAiPlayer::~MyaAiPlayer()
+MyAiPlayer::~MyAiPlayer()
 {
 
 }
 
-Position MyaAiPlayer::place(Field *board, int sizeX, int sizeY)
+Position MyAiPlayer::place(Field *board, int sizeX, int sizeY)
 {
     this->BoardData = board;
     this->sizeX = sizeX;
@@ -51,7 +51,7 @@ Position MyaAiPlayer::place(Field *board, int sizeX, int sizeY)
     return PlacementAdvantages.at(0).position;
 }
 
-Threat MyaAiPlayer::getThreatForPlayer(Field lookingFor)
+Threat MyAiPlayer::getThreatForPlayer(Field lookingFor)
 {
     unsigned char PossibilitiesRight[sizeX * sizeY];
     unsigned char PossibilitiesRightBottom[sizeX * sizeY];

@@ -4,11 +4,11 @@
 #include "threat.h"
 #include "advantage.h"
 
-class MyaAiPlayer : public AiPlayer
+class MyAiPlayer : public AiPlayer
 {
 public:
-    MyaAiPlayer();
-    ~MyaAiPlayer();
+    MyAiPlayer();
+    ~MyAiPlayer();
     Position place(Field* board, int sizeX, int sizeY);
 private:
     int sizeX, sizeY;

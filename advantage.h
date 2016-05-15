@@ -6,10 +6,10 @@
 class Advantage
 {
 public:
-    Advantage(Position position, Threat OpponentThreatDecrease, Threat PlayerThreatInscrease);
+    Advantage(Position position, Threat OpponentThreatDecrease, Threat PlayerThreatIncrease);
     Position position;
     Threat OpponentThreatDecrease;
-    Threat PlayerThreatInscrease;
+    Threat PlayerThreatIncrease;
     bool operator>(const Advantage& otherAdvantage) const;
     bool operator<(const Advantage& otherAdvantage) const;
 };
