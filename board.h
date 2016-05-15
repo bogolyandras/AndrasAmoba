@@ -22,6 +22,7 @@ private:
     int sizeX;
     int sizeY;
     BoardState boardState;
+    void checkBoardState();
 };
 
 #endif // BOARD_H

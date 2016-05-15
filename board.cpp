@@ -1,7 +1,7 @@
 #include "board.h"
 
 Board::Board(int sizeX, int sizeY)
-    : boardState(BoardState::UnderProgress), sizeX(sizeX), sizeY(sizeY)
+    : sizeX(sizeX), sizeY(sizeY), boardState(BoardState::UnderProgress)
 {
     BoardData = new Field[sizeX * sizeY];
     for (int i = 0; i < sizeX * sizeY; ++i) {
@@ -23,6 +23,7 @@ void Board::createNew(int sizeX, int sizeY)
     for (int i = 0; i < sizeX * sizeY; ++i) {
         BoardData[i] = Field::Empty;
     }
+    boardState = BoardState::UnderProgress;
 }
 
 int Board::getSizeX() const
@@ -69,6 +70,7 @@ bool Board::placeForPlayer1(Position pos)
 {
     if (BoardData[Position::TranslatePosition(pos, sizeX, sizeY)] == Field::Empty) {
         BoardData[Position::TranslatePosition(pos, sizeX, sizeY)] = Field::O;
+        checkBoardState();
         return true;
     }
     return false;
@@ -78,6 +80,7 @@ bool Board::placeForPlayer2(Position pos)
 {
     if (BoardData[Position::TranslatePosition(pos, sizeX, sizeY)] == Field::Empty) {
         BoardData[Position::TranslatePosition(pos, sizeX, sizeY)] = Field::X;
+        checkBoardState();
         return true;
     }
     return false;
@@ -86,4 +89,9 @@ bool Board::placeForPlayer2(Position pos)
 BoardState Board::getBoardState() const
 {
     return boardState;
+}
+
+void Board::checkBoardState()
+{
+
 }
