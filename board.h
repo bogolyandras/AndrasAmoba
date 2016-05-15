@@ -18,7 +18,7 @@ public:
     bool placeForPlayer1(Position pos);
     bool placeForPlayer2(Position pos);
     BoardState getBoardState() const;
-    std::vector<Position> getWinPosition() const;
+    const std::vector<Position>& getWinPosition() const;
 private:
     Field* BoardData;
     int sizeX;

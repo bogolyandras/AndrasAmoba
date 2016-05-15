@@ -16,7 +16,7 @@ public:
     bool getLastMoveExists() const;
     Position getLastMove() const;
     BoardState getBoardState() const;
-    std::vector<Position> getWinPosition() const;
+    const std::vector<Position>& getWinPosition() const;
     void reset();
 private:
     TicTacToeTableModel dataModel;

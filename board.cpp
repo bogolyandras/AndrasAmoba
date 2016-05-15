@@ -94,7 +94,7 @@ BoardState Board::getBoardState() const
     return boardState;
 }
 
-std::vector<Position> Board::getWinPosition() const
+const std::vector<Position>& Board::getWinPosition() const
 {
     return winPosition;
 }
