@@ -10,7 +10,7 @@ Advantage::Advantage(Position position, Threat OpponentThreatDecrease, Threat Pl
 
 bool Advantage::operator>(const Advantage &otherAdvantage) const
 {
-    return (*this<otherAdvantage);
+    return !(*this<otherAdvantage);
 }
 
 bool Advantage::operator<(const Advantage &otherAdvantage) const
