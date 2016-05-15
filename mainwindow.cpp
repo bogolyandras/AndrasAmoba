@@ -23,6 +23,10 @@ void MainWindow::on_actionQuit_triggered()
 
 void MainWindow::on_tableView_clicked(const QModelIndex &index)
 {
+    //Check if game in progress
+    if (controller.getBoardState() != BoardState::UnderProgress)
+        return;
+
     //Check if it is clicked on the board
     if(index.isValid()) {
         Position p(index.column(), index.row());

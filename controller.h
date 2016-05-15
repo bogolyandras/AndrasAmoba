@@ -15,6 +15,7 @@ public:
     void placeObject(Position pos);
     bool getLastMoveExists() const;
     Position getLastMove() const;
+    BoardState getBoardState() const;
     void reset();
 private:
     TicTacToeTableModel dataModel;

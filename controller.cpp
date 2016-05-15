@@ -31,19 +31,24 @@ TicTacToeTableModel *Controller::getDataModel()
 
 void Controller::placeObject(Position pos)
 {
-    //Attempt placement for human player
-    if (!board.placeForPlayer1(pos))
-    {
-        lastMoveExists = true;
-        lastMove = pos;
-        return; //If not succesful, return...
-    }
+    //Check if game in progress
+    if (board.getBoardState()!=BoardState::UnderProgress)
+        return;
 
-    //Place for the AI
-    Position aiMove = ai->place(board.translateForPlayer2(), board.getSizeX(), board.getSizeY());
+    //Attempt placement for human player
+    bool lastMoveSuccess = board.placeForPlayer1(pos);
     lastMoveExists = true;
-    lastMove = aiMove;
-    board.placeForPlayer2(aiMove);
+    lastMove = pos;
+    if (!lastMoveSuccess)
+        return; //If not succesful, return with the unsuccesful position
+
+    //Place for the AI if game still in progress
+    if (board.getBoardState()==BoardState::UnderProgress) {
+        Position aiMove = ai->place(board.translateForPlayer2(), board.getSizeX(), board.getSizeY());
+        lastMoveExists = true;
+        lastMove = aiMove;
+        board.placeForPlayer2(aiMove);
+    }
 
     //Update the model
     Field* data = board.translateForPlayer1();
@@ -59,4 +64,9 @@ bool Controller::getLastMoveExists() const
 Position Controller::getLastMove() const
 {
     return lastMove;
+}
+
+BoardState Controller::getBoardState() const
+{
+    return board.getBoardState();
 }
