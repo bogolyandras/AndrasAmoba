@@ -1,7 +1,8 @@
 #include "board.h"
 
 Board::Board(int sizeX, int sizeY)
-    : sizeX(sizeX), sizeY(sizeY), boardState(BoardState::UnderProgress)
+    : sizeX(sizeX), sizeY(sizeY),
+      boardState(BoardState::UnderProgress), winPosition()
 {
     BoardData = new Field[sizeX * sizeY];
     for (int i = 0; i < sizeX * sizeY; ++i) {

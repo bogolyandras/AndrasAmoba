@@ -1,5 +1,6 @@
 #ifndef BOARD_H
 #define BOARD_H
+#include <vector>
 #include "field.h"
 #include "position.h"
 #include "boardstate.h"
@@ -22,6 +23,7 @@ private:
     int sizeX;
     int sizeY;
     BoardState boardState;
+    std::vector<Position> winPosition;
     void checkBoardState();
 };
 

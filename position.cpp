@@ -10,6 +10,11 @@ Position::Position(int X, int Y) : X(X), Y(Y)
 
 }
 
+bool Position::operator==(const Position &otherPosition)
+{
+    return X == otherPosition.X && Y == otherPosition.Y;
+}
+
 int Position::TranslatePosition(Position pos, int sizeX, int sizeY)
 {
     return pos.Y * sizeX + pos.X;
