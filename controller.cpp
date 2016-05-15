@@ -17,13 +17,24 @@ Controller::~Controller()
     delete ai;
 }
 
-void Controller::reset()
+void Controller::reset(bool iAmStarting)
 {
     board.createNew(35, 25);
     Field* data = board.translateForPlayer1();
     dataModel.loadData(data, board.getSizeX(), board.getSizeY());
     delete[] data;
     lastMoveExists = false;
+
+    //First step for the AI
+    if (!iAmStarting) {
+        Position aiMove = ai->place(board.translateForPlayer2(), board.getSizeX(), board.getSizeY());
+        lastMoveExists = true;
+        lastMove = aiMove;
+        board.placeForPlayer2(aiMove);
+        Field* data = board.translateForPlayer1();
+        dataModel.loadData(data, board.getSizeX(), board.getSizeY());
+        delete[] data;
+    }
 }
 
 TicTacToeTableModel *Controller::getDataModel()

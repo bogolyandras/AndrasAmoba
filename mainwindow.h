@@ -29,6 +29,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     Controller controller;
+    void markLastStepIfPossible();
 };
 
 #endif // MAINWINDOW_H

@@ -35,13 +35,7 @@ void MainWindow::on_tableView_clicked(const QModelIndex &index)
 
         if(controller.getBoardState()==BoardState::UnderProgress) {
             //Mark last movement
-            if (controller.getLastMoveExists())
-            {
-                Position lastMove = controller.getLastMove();
-                ui->tableView->clearSelection();
-                ui->tableView->selectionModel()->select(
-                            ui->tableView->model()->index(lastMove.Y, lastMove.X), QItemSelectionModel::Select);
-            }
+            markLastStepIfPossible();
         } else {
             ui->tableView->clearSelection();
 
@@ -71,7 +65,8 @@ void MainWindow::on_tableView_clicked(const QModelIndex &index)
 
 void MainWindow::on_actionNew_game_triggered()
 {
-    controller.reset();
+    controller.reset(ui->actionI_am_starting_the_game->isChecked());
+    markLastStepIfPossible();
 }
 
 void MainWindow::on_actionAbout_triggered()
@@ -80,4 +75,16 @@ void MainWindow::on_actionAbout_triggered()
     msgBox.setWindowTitle("About Tic Tac Toe");
     msgBox.setText("Copyright © 2016\nAndrás Bögöly \nSome rights reserved, see LICENSE.md");
     msgBox.exec();
+}
+
+void MainWindow::markLastStepIfPossible()
+{
+    //Mark last movement
+    if (controller.getLastMoveExists())
+    {
+        Position lastMove = controller.getLastMove();
+        ui->tableView->clearSelection();
+        ui->tableView->selectionModel()->select(
+                    ui->tableView->model()->index(lastMove.Y, lastMove.X), QItemSelectionModel::Select);
+    }
 }
