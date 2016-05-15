@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     aiplayer.cpp \
     position.cpp \
     threat.cpp \
-    myaiplayer.cpp
+    myaiplayer.cpp \
+    advantage.cpp
 
 HEADERS  += mainwindow.h \
     controller.h \
@@ -33,7 +34,8 @@ HEADERS  += mainwindow.h \
     position.h \
     boardstate.h \
     threat.h \
-    myaiplayer.h
+    myaiplayer.h \
+    advantage.h
 
 FORMS    += mainwindow.ui
 

@@ -12,6 +12,10 @@ public:
     unsigned char Threat3;
     unsigned char Threat4;
     unsigned char Threat5;
+    Threat &operator+=(const Threat &otherThreat);
+    Threat &operator-=(const Threat &otherThreat);
+    Threat operator+(const Threat &otherThreat) const;
+    Threat operator-(const Threat &otherThreat) const;
 };
 
 #endif // THREAT_H

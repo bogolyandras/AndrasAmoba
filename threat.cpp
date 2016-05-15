@@ -5,3 +5,39 @@ Threat::Threat() :
 {
 
 }
+
+Threat &Threat::operator+=(const Threat &otherThreat)
+{
+    Threat0 += otherThreat.Threat0;
+    Threat1 += otherThreat.Threat1;
+    Threat2 += otherThreat.Threat2;
+    Threat3 += otherThreat.Threat3;
+    Threat4 += otherThreat.Threat4;
+    Threat5 += otherThreat.Threat5;
+    return *this;
+}
+
+Threat &Threat::operator-=(const Threat &otherThreat)
+{
+    Threat0 -= otherThreat.Threat0;
+    Threat1 -= otherThreat.Threat1;
+    Threat2 -= otherThreat.Threat2;
+    Threat3 -= otherThreat.Threat3;
+    Threat4 -= otherThreat.Threat4;
+    Threat5 -= otherThreat.Threat5;
+    return *this;
+}
+
+Threat Threat::operator+(const Threat &otherThreat) const
+{
+    Threat threat = *this;
+    threat += otherThreat;
+    return threat;
+}
+
+Threat Threat::operator-(const Threat &otherThreat) const
+{
+    Threat threat = *this;
+    threat -= otherThreat;
+    return threat;
+}

@@ -2,6 +2,7 @@
 #define MYAIPLAYER_H
 #include "aiplayer.h"
 #include "threat.h"
+#include "advantage.h"
 
 class MyaAiPlayer : public AiPlayer
 {

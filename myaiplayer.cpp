@@ -1,4 +1,6 @@
+#include <vector>
 #include "myaiplayer.h"
+
 
 MyaAiPlayer::MyaAiPlayer() : sizeX(0), sizeY(0), BoardData(nullptr)
 {
@@ -15,6 +17,32 @@ Position MyaAiPlayer::place(Field *board, int sizeX, int sizeY)
     this->BoardData = board;
     this->sizeX = sizeX;
     this->sizeY = sizeY;
+
+    std::vector<Advantage> PlacementAdvantages;
+
+    Threat StartOpponentThreat = getThreatForPlayer(Field::X);
+    Threat StartPlayerThreat = getThreatForPlayer(Field::O);
+
+    for (int i = 0; i < sizeX * sizeY; ++i) {
+        Position p = Position::TranslatePosition(i, sizeX, sizeY);
+
+        //Is it possible to place something here?
+        if (BoardData[i] != Field::Empty)
+            continue;
+
+        //Place our mark here
+        BoardData[i] = Field::O;
+
+        Advantage a;
+        a.position = p;
+        a.OpponentThreatDecrease = StartOpponentThreat - getThreatForPlayer(Field::X);
+        a.PlayerThreatInscrease = getThreatForPlayer(Field::O) - StartPlayerThreat;
+
+
+
+        //Remove the placement
+        BoardData[i] = Field::Empty;
+    }
 }
 
 Threat MyaAiPlayer::getThreatForPlayer(Field lookingFor)
