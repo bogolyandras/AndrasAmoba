@@ -28,7 +28,8 @@ HEADERS  += mainwindow.h \
     field.h \
     randomaiplayer.h \
     aiplayer.h \
-    position.h
+    position.h \
+    boardstate.h
 
 FORMS    += mainwindow.ui
 

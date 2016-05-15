@@ -1,7 +1,8 @@
 #include "controller.h"
 #include "randomaiplayer.h"
 
-Controller::Controller() : board(35, 25)
+Controller::Controller() :
+    board(35, 25), lastMoveExists(false), lastMove(0, 0)
 {
     ai = new RandomAIPlayer();
     Field* data = board.translateForPlayer1();
@@ -20,6 +21,7 @@ void Controller::reset()
     Field* data = board.translateForPlayer1();
     dataModel.loadData(data, board.getSizeX(), board.getSizeY());
     delete[] data;
+    lastMoveExists = false;
 }
 
 TicTacToeTableModel *Controller::getDataModel()
@@ -27,16 +29,34 @@ TicTacToeTableModel *Controller::getDataModel()
     return &(this->dataModel);
 }
 
-Position Controller::placeObject(Position pos)
+void Controller::placeObject(Position pos)
 {
+    //Attempt placement for human player
     if (!board.placeForPlayer1(pos))
-        return pos;
+    {
+        lastMoveExists = true;
+        lastMove = pos;
+        return; //If not succesful, return...
+    }
+
+    //Place for the AI
     Position aiMove = ai->place(board.translateForPlayer2(), board.getSizeX(), board.getSizeY());
+    lastMoveExists = true;
+    lastMove = aiMove;
     board.placeForPlayer2(aiMove);
 
+    //Update the model
     Field* data = board.translateForPlayer1();
     dataModel.loadData(data, board.getSizeX(), board.getSizeY());
     delete[] data;
+}
 
-    return aiMove;
+bool Controller::getLastMoveExists() const
+{
+    return lastMoveExists;
+}
+
+Position Controller::getLastMove() const
+{
+    return lastMove;
 }

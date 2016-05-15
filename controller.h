@@ -12,11 +12,15 @@ public:
     Controller();
     ~Controller();
     TicTacToeTableModel* getDataModel();
-    Position placeObject(Position pos);
+    void placeObject(Position pos);
+    bool getLastMoveExists() const;
+    Position getLastMove() const;
     void reset();
 private:
     TicTacToeTableModel dataModel;
     Board board;
+    bool lastMoveExists;
+    Position lastMove;
     AiPlayer* ai;
 };
 

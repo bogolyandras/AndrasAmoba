@@ -2,6 +2,7 @@
 #define BOARD_H
 #include "field.h"
 #include "position.h"
+#include "boardstate.h"
 
 class Board
 {
@@ -15,10 +16,12 @@ public:
     Field* translateForPlayer2();
     bool placeForPlayer1(Position pos);
     bool placeForPlayer2(Position pos);
+    BoardState getBoardState() const;
 private:
     Field* BoardData;
     int sizeX;
     int sizeY;
+    BoardState boardState;
 };
 
 #endif // BOARD_H

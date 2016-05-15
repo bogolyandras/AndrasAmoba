@@ -23,12 +23,19 @@ void MainWindow::on_actionQuit_triggered()
 
 void MainWindow::on_tableView_clicked(const QModelIndex &index)
 {
+    //Check if it is clicked on the board
     if(index.isValid()) {
         Position p(index.column(), index.row());
-        Position lastMove = controller.placeObject(p);
-        ui->tableView->clearSelection();
-        ui->tableView->selectionModel()->select(
-                    ui->tableView->model()->index(lastMove.Y, lastMove.X), QItemSelectionModel::Select);
+        controller.placeObject(p);
+
+        //Mark last movement
+        if (controller.getLastMoveExists())
+        {
+            Position lastMove = controller.getLastMove();
+            ui->tableView->clearSelection();
+            ui->tableView->selectionModel()->select(
+                        ui->tableView->model()->index(lastMove.Y, lastMove.X), QItemSelectionModel::Select);
+        }
 
     }
 }

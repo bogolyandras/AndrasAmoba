@@ -1,9 +1,8 @@
 #include "board.h"
 
 Board::Board(int sizeX, int sizeY)
+    : boardState(BoardState::UnderProgress), sizeX(sizeX), sizeY(sizeY)
 {
-    this->sizeX = sizeX;
-    this->sizeY = sizeY;
     BoardData = new Field[sizeX * sizeY];
     for (int i = 0; i < sizeX * sizeY; ++i) {
         BoardData[i] = Field::Empty;
@@ -82,4 +81,9 @@ bool Board::placeForPlayer2(Position pos)
         return true;
     }
     return false;
+}
+
+BoardState Board::getBoardState() const
+{
+    return boardState;
 }
