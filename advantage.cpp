@@ -15,76 +15,76 @@ bool Advantage::operator>(const Advantage &otherAdvantage) const
 
 bool Advantage::operator<(const Advantage &otherAdvantage) const
 {
-    //Defense 5
-    if (this->OpponentThreatDecrease.Threat5 > otherAdvantage.OpponentThreatDecrease.Threat5) {
+    // Attack 5
+    if (this->PlayerThreatIncrease.Threat5 > otherAdvantage.PlayerThreatIncrease.Threat5) {
         return true;
-    } else if(this->OpponentThreatDecrease.Threat5 < otherAdvantage.OpponentThreatDecrease.Threat5) {
+    } else if (this->PlayerThreatIncrease.Threat5 < otherAdvantage.PlayerThreatIncrease.Threat5) {
         return false;
     } else {
-        // Attack 5
-        if (this->PlayerThreatIncrease.Threat5 > otherAdvantage.PlayerThreatIncrease.Threat5) {
+        //Defense 5
+        if (this->OpponentThreatDecrease.Threat5 > otherAdvantage.OpponentThreatDecrease.Threat5) {
             return true;
-        } else if (this->PlayerThreatIncrease.Threat5 < otherAdvantage.PlayerThreatIncrease.Threat5) {
+        } else if(this->OpponentThreatDecrease.Threat5 < otherAdvantage.OpponentThreatDecrease.Threat5) {
             return false;
         } else {
-            //Defense 4
-            if (this->OpponentThreatDecrease.Threat4 > otherAdvantage.OpponentThreatDecrease.Threat4) {
+            //Attack 4
+            if (this->PlayerThreatIncrease.Threat4 > otherAdvantage.PlayerThreatIncrease.Threat4) {
                 return true;
-            } else if(this->OpponentThreatDecrease.Threat4 < otherAdvantage.OpponentThreatDecrease.Threat4) {
+            } else if (this->PlayerThreatIncrease.Threat4 < otherAdvantage.PlayerThreatIncrease.Threat4) {
                 return false;
             } else {
-                //Attack 4
-                if (this->PlayerThreatIncrease.Threat4 > otherAdvantage.PlayerThreatIncrease.Threat4) {
+                //Defence 4
+                if (this->OpponentThreatDecrease.Threat4 > otherAdvantage.OpponentThreatDecrease.Threat4) {
                     return true;
-                } else if (this->PlayerThreatIncrease.Threat4 < otherAdvantage.PlayerThreatIncrease.Threat4) {
+                } else if(this->OpponentThreatDecrease.Threat4 < otherAdvantage.OpponentThreatDecrease.Threat4) {
                     return false;
                 } else {
-                    //Defence 3
-                    if (this->OpponentThreatDecrease.Threat3 > otherAdvantage.OpponentThreatDecrease.Threat3) {
+                    //Attack 3
+                    if (this->PlayerThreatIncrease.Threat3 > otherAdvantage.PlayerThreatIncrease.Threat3) {
                         return true;
-                    } else if(this->OpponentThreatDecrease.Threat3 < otherAdvantage.OpponentThreatDecrease.Threat3) {
+                    } else if (this->PlayerThreatIncrease.Threat3 < otherAdvantage.PlayerThreatIncrease.Threat3) {
                         return false;
                     } else {
-                        //Attack 3
-                        if (this->PlayerThreatIncrease.Threat3 > otherAdvantage.PlayerThreatIncrease.Threat3) {
+                        //Defense 3
+                        if (this->OpponentThreatDecrease.Threat3 > otherAdvantage.OpponentThreatDecrease.Threat3) {
                             return true;
-                        } else if (this->PlayerThreatIncrease.Threat3 < otherAdvantage.PlayerThreatIncrease.Threat3) {
+                        } else if(this->OpponentThreatDecrease.Threat3 < otherAdvantage.OpponentThreatDecrease.Threat3) {
                             return false;
                         } else {
-                            //Defense 2
-                            if (this->OpponentThreatDecrease.Threat2 > otherAdvantage.OpponentThreatDecrease.Threat2) {
+                            //Attack 2
+                            if (this->PlayerThreatIncrease.Threat2 > otherAdvantage.PlayerThreatIncrease.Threat2) {
                                 return true;
-                            } else if(this->OpponentThreatDecrease.Threat2 < otherAdvantage.OpponentThreatDecrease.Threat2) {
+                            } else if (this->PlayerThreatIncrease.Threat2 < otherAdvantage.PlayerThreatIncrease.Threat2) {
                                 return false;
                             } else {
-                                //Attack 2
-                                if (this->PlayerThreatIncrease.Threat2 > otherAdvantage.PlayerThreatIncrease.Threat2) {
+                                //Defense 2
+                                if (this->OpponentThreatDecrease.Threat2 > otherAdvantage.OpponentThreatDecrease.Threat2) {
                                     return true;
-                                } else if (this->PlayerThreatIncrease.Threat2 < otherAdvantage.PlayerThreatIncrease.Threat2) {
+                                } else if(this->OpponentThreatDecrease.Threat2 < otherAdvantage.OpponentThreatDecrease.Threat2) {
                                     return false;
                                 } else {
-                                    //Defense 1
-                                    if (this->OpponentThreatDecrease.Threat1 > otherAdvantage.OpponentThreatDecrease.Threat1) {
+                                    //Attack 1
+                                    if (this->PlayerThreatIncrease.Threat1 > otherAdvantage.PlayerThreatIncrease.Threat1) {
                                         return true;
-                                    } else if(this->OpponentThreatDecrease.Threat1 < otherAdvantage.OpponentThreatDecrease.Threat1) {
+                                    } else if (this->PlayerThreatIncrease.Threat1 < otherAdvantage.PlayerThreatIncrease.Threat1) {
                                         return false;
                                     } else {
-                                        //Attack 1
-                                        if (this->PlayerThreatIncrease.Threat1 > otherAdvantage.PlayerThreatIncrease.Threat1) {
+                                        //Defense 1
+                                        if (this->OpponentThreatDecrease.Threat1 > otherAdvantage.OpponentThreatDecrease.Threat1) {
                                             return true;
-                                        } else if (this->PlayerThreatIncrease.Threat1 < otherAdvantage.PlayerThreatIncrease.Threat1) {
+                                        } else if(this->OpponentThreatDecrease.Threat1 < otherAdvantage.OpponentThreatDecrease.Threat1) {
                                             return false;
                                         } else {
-                                            //Defense 0
-                                            if (this->OpponentThreatDecrease.Threat0 > otherAdvantage.OpponentThreatDecrease.Threat0) {
+                                            //Attack 0
+                                            if (this->PlayerThreatIncrease.Threat0 > otherAdvantage.PlayerThreatIncrease.Threat0) {
                                                 return true;
-                                            } else if(this->OpponentThreatDecrease.Threat0 < otherAdvantage.OpponentThreatDecrease.Threat0) {
+                                            } else if (this->PlayerThreatIncrease.Threat0 < otherAdvantage.PlayerThreatIncrease.Threat0) {
                                                 return false;
                                             } else {
-                                                //Attack 0
-                                                if (this->PlayerThreatIncrease.Threat0 > otherAdvantage.PlayerThreatIncrease.Threat0) {
+                                                //Defense 0
+                                                if (this->OpponentThreatDecrease.Threat0 > otherAdvantage.OpponentThreatDecrease.Threat0) {
                                                     return true;
-                                                } else if (this->PlayerThreatIncrease.Threat0 < otherAdvantage.PlayerThreatIncrease.Threat0) {
+                                                } else if(this->OpponentThreatDecrease.Threat0 < otherAdvantage.OpponentThreatDecrease.Threat0) {
                                                     return false;
                                                 } else {
                                                     return false;
