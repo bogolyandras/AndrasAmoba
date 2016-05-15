@@ -25,6 +25,7 @@ void Board::createNew(int sizeX, int sizeY)
         BoardData[i] = Field::Empty;
     }
     boardState = BoardState::UnderProgress;
+    winPosition.clear();
 }
 
 int Board::getSizeX() const
@@ -126,6 +127,18 @@ void Board::checkBoardState()
          *    X
          *     X
          */
+        if (p.X + 4 < sizeX && p.Y + 4 < sizeY) {
+            for (int j = 0; j < 5; ++j) {
+                Position p2 = p;
+                p2.X += j;
+                p2.Y += j;
+                if (lookingFor != BoardData[Position::TranslatePosition(p2, sizeX, sizeY)])
+                    break;
+                if (j == 4) {
+                    winPosition.push_back(p);
+                }
+            }
+        }
 
         /*
          * X
@@ -134,6 +147,17 @@ void Board::checkBoardState()
          * X
          * X
          */
+        if (p.Y + 4 < sizeY) {
+            for (int j = 0; j < 5; ++j) {
+                Position p2 = p;
+                p2.Y += j;
+                if (lookingFor != BoardData[Position::TranslatePosition(p2, sizeX, sizeY)])
+                    break;
+                if (j == 4) {
+                    winPosition.push_back(p);
+                }
+            }
+        }
 
         /*
          *     X
@@ -142,6 +166,18 @@ void Board::checkBoardState()
          *  X
          * X
          */
+        if (p.X - 4 >= 0 && p.Y + 4 < sizeY) {
+            for (int j = 0; j < 5; ++j) {
+                Position p2 = p;
+                p2.X -= j;
+                p2.Y += j;
+                if (lookingFor != BoardData[Position::TranslatePosition(p2, sizeX, sizeY)])
+                    break;
+                if (j == 4) {
+                    winPosition.push_back(p);
+                }
+            }
+        }
     }
 
     if (winPosition.size() > 0) {
