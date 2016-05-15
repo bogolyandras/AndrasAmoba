@@ -2,10 +2,10 @@
 #define THREAT_H
 
 
-class threat
+class Threat
 {
 public:
-    threat();
+    Threat();
     unsigned char Threat0;
     unsigned char Threat1;
     unsigned char Threat2;
