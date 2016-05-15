@@ -55,16 +55,15 @@ Field* Board::translateForPlayer2()
     data = new Field[sizeX * sizeY];
     for (int i = 0; i < sizeX * sizeY; ++i) {
         switch (BoardData[i]) {
-        case Field::O:
-            data[i] = Field::X;
-            break;
         case Field::X:
             data[i] = Field::O;
+            break;
+        case Field::O:
+            data[i] = Field::X;
             break;
         default:
             data[i] = BoardData[i];
         }
-
     }
     return data;
 }

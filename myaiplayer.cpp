@@ -1,9 +1,8 @@
 #include <vector>
-#include <algorithm>
 #include "myaiplayer.h"
 
 
-MyAiPlayer::MyAiPlayer() : sizeX(0), sizeY(0), BoardData(nullptr)
+MyAiPlayer::MyAiPlayer() : sizeX(0), sizeY(0), BoardData(nullptr), PlacementAdvantages()
 {
 
 }
@@ -13,13 +12,17 @@ MyAiPlayer::~MyAiPlayer()
 
 }
 
+void ReduceAttackSteps() {
+
+}
+
 Position MyAiPlayer::place(Field *board, int sizeX, int sizeY)
 {
     this->BoardData = board;
     this->sizeX = sizeX;
     this->sizeY = sizeY;
 
-    std::vector<Advantage> PlacementAdvantages;
+    PlacementAdvantages.clear();
 
     Threat StartOpponentThreat = getThreatForPlayer(Field::X);
     Threat StartPlayerThreat = getThreatForPlayer(Field::O);
@@ -45,9 +48,6 @@ Position MyAiPlayer::place(Field *board, int sizeX, int sizeY)
         BoardData[i] = Field::Empty;
     }
 
-    //Sort the advantages accordingly
-    std::sort(PlacementAdvantages.begin(), PlacementAdvantages.end());
-
     return PlacementAdvantages.at(0).position;
 }
 
@@ -69,8 +69,8 @@ Threat MyAiPlayer::getThreatForPlayer(Field lookingFor)
          *
          */
         PossibilitiesRight[i] = 0;
-        if (p.X + 4 < sizeX) {
-            int ThreatCount = 1;
+        if (p.X + 4 <= sizeX) {
+            unsigned char ThreatCount = 1;
             for (int j = 0; j < 5; ++j) {
                 Position p2 = p;
                 p2.X += j;
@@ -93,8 +93,8 @@ Threat MyAiPlayer::getThreatForPlayer(Field lookingFor)
          *     X
          */
         PossibilitiesRightBottom[i] = 0;
-        if (p.X + 4 < sizeX && p.Y + 4 < sizeY) {
-            int ThreatCount = 1;
+        if (p.X + 4 <= sizeX && p.Y + 4 <= sizeY) {
+            unsigned char ThreatCount = 1;
             for (int j = 0; j < 5; ++j) {
                 Position p2 = p;
                 p2.X += j;
@@ -118,8 +118,8 @@ Threat MyAiPlayer::getThreatForPlayer(Field lookingFor)
          * X
          */
         PossibilitiesBottom[i] = 0;
-        if (p.Y + 4 < sizeY) {
-            int ThreatCount = 1;
+        if (p.Y + 4 <= sizeY) {
+            unsigned char ThreatCount = 1;
             for (int j = 0; j < 5; ++j) {
                 Position p2 = p;
                 p2.Y += j;
@@ -142,8 +142,8 @@ Threat MyAiPlayer::getThreatForPlayer(Field lookingFor)
          * X
          */
         PossibilitiesLeftBottom[i] = 0;
-        if (p.X - 4 >= 0 && p.Y + 4 < sizeY) {
-            int ThreatCount = 1;
+        if (p.X - 4 >= 0 && p.Y + 4 <= sizeY) {
+            unsigned char ThreatCount = 1;
             for (int j = 0; j < 5; ++j) {
                 Position p2 = p;
                 p2.X -= j;

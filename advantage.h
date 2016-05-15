@@ -10,8 +10,6 @@ public:
     Position position;
     Threat OpponentThreatDecrease;
     Threat PlayerThreatIncrease;
-    bool operator>(const Advantage& otherAdvantage) const;
-    bool operator<(const Advantage& otherAdvantage) const;
 };
 
 #endif // ADVANTAGE_H

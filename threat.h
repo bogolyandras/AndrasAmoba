@@ -6,12 +6,12 @@ class Threat
 {
 public:
     Threat();
-    unsigned char Threat0;
-    unsigned char Threat1;
-    unsigned char Threat2;
-    unsigned char Threat3;
-    unsigned char Threat4;
-    unsigned char Threat5;
+    int Threat0;
+    int Threat1;
+    int Threat2;
+    int Threat3;
+    int Threat4;
+    int Threat5;
     Threat &operator+=(const Threat &otherThreat);
     Threat &operator-=(const Threat &otherThreat);
     Threat operator+(const Threat &otherThreat) const;

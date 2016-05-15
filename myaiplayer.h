@@ -14,6 +14,7 @@ private:
     int sizeX, sizeY;
     Field* BoardData;
     Threat getThreatForPlayer(Field playerField);
+    std::vector<Advantage> PlacementAdvantages;
 };
 
 #endif // MYAIPLAYER_H
