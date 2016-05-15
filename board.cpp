@@ -94,5 +94,58 @@ BoardState Board::getBoardState() const
 
 void Board::checkBoardState()
 {
+    Field lookingFor = Field::O;
+
+    //Iterate over all the positions
+    for (int i = 0; i < sizeX * sizeY; ++i) {
+        Position p = Position::TranslatePosition(i, sizeX, sizeY);
+
+        /*
+         * XXXXX
+         *
+         *
+         *
+         *
+         */
+        if (p.X + 4 < sizeX) {
+            for (int j = 0; j < 5; ++j) {
+                Position p2 = p;
+                p2.X += j;
+                if (lookingFor != BoardData[Position::TranslatePosition(p2, sizeX, sizeY)])
+                    break;
+                if (j == 4) {
+                    winPosition.push_back(p);
+                }
+            }
+        }
+
+        /*
+         * X
+         *  X
+         *   X
+         *    X
+         *     X
+         */
+
+        /*
+         * X
+         * X
+         * X
+         * X
+         * X
+         */
+
+        /*
+         *     X
+         *    X
+         *   X
+         *  X
+         * X
+         */
+    }
+
+    if (winPosition.size() > 0) {
+        boardState =  BoardState::Player1Win;
+    }
 
 }
