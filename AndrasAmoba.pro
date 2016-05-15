@@ -19,7 +19,9 @@ SOURCES += main.cpp\
     board.cpp \
     randomaiplayer.cpp \
     aiplayer.cpp \
-    position.cpp
+    position.cpp \
+    threat.cpp \
+    myaiplayer.cpp
 
 HEADERS  += mainwindow.h \
     controller.h \
@@ -29,7 +31,9 @@ HEADERS  += mainwindow.h \
     randomaiplayer.h \
     aiplayer.h \
     position.h \
-    boardstate.h
+    boardstate.h \
+    threat.h \
+    myaiplayer.h
 
 FORMS    += mainwindow.ui
 
