@@ -1,4 +1,5 @@
 #include <vector>
+#include <algorithm>
 #include "myaiplayer.h"
 
 
@@ -23,6 +24,7 @@ Position MyaAiPlayer::place(Field *board, int sizeX, int sizeY)
     Threat StartOpponentThreat = getThreatForPlayer(Field::X);
     Threat StartPlayerThreat = getThreatForPlayer(Field::O);
 
+    //Iterate over all possible steps
     for (int i = 0; i < sizeX * sizeY; ++i) {
         Position p = Position::TranslatePosition(i, sizeX, sizeY);
 
@@ -33,16 +35,20 @@ Position MyaAiPlayer::place(Field *board, int sizeX, int sizeY)
         //Place our mark here
         BoardData[i] = Field::O;
 
-        Advantage a;
-        a.position = p;
-        a.OpponentThreatDecrease = StartOpponentThreat - getThreatForPlayer(Field::X);
-        a.PlayerThreatInscrease = getThreatForPlayer(Field::O) - StartPlayerThreat;
-
-
+        //Count the advantage the step
+        Advantage a(p,
+                    StartOpponentThreat - getThreatForPlayer(Field::X),
+                    getThreatForPlayer(Field::O) - StartPlayerThreat);
+        PlacementAdvantages.push_back(a);
 
         //Remove the placement
         BoardData[i] = Field::Empty;
     }
+
+    //Sort the advantages accordingly
+    std::sort(PlacementAdvantages.begin(), PlacementAdvantages.end());
+
+    return PlacementAdvantages.at(0).position;
 }
 
 Threat MyaAiPlayer::getThreatForPlayer(Field lookingFor)

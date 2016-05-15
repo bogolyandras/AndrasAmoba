@@ -6,10 +6,12 @@
 class Advantage
 {
 public:
-    Advantage();
+    Advantage(Position position, Threat OpponentThreatDecrease, Threat PlayerThreatInscrease);
     Position position;
     Threat OpponentThreatDecrease;
     Threat PlayerThreatInscrease;
+    bool operator>(const Advantage& otherAdvantage) const;
+    bool operator<(const Advantage& otherAdvantage) const;
 };
 
 #endif // ADVANTAGE_H
