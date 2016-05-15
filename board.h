@@ -18,6 +18,7 @@ public:
     bool placeForPlayer1(Position pos);
     bool placeForPlayer2(Position pos);
     BoardState getBoardState() const;
+    std::vector<Position> getWinPosition() const;
 private:
     Field* BoardData;
     int sizeX;
@@ -25,6 +26,8 @@ private:
     BoardState boardState;
     std::vector<Position> winPosition;
     void checkBoardState();
+    void checkForSpecificPlayer(Field playerField);
+    void addWinPosition(Position p);
 };
 
 #endif // BOARD_H

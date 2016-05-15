@@ -43,6 +43,19 @@ void MainWindow::on_tableView_clicked(const QModelIndex &index)
                             ui->tableView->model()->index(lastMove.Y, lastMove.X), QItemSelectionModel::Select);
             }
         } else {
+            ui->tableView->clearSelection();
+
+            std::vector<Position> winPositions = controller.getWinPosition();
+            for (std::vector<Position>::iterator it = winPositions.begin();
+                 it != winPositions.end();
+                 ++it) {
+
+                Position winningPosition = (*it);
+                ui->tableView->selectionModel()->select(
+                            ui->tableView->model()->index(winningPosition.Y, winningPosition.X), QItemSelectionModel::Select);
+
+            }
+
             QMessageBox msgBox;
             msgBox.setWindowTitle("The game ends!");
             if (controller.getBoardState()==BoardState::Player1Win) {

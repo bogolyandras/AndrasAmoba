@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "board.h"
 
 Board::Board(int sizeX, int sizeY)
@@ -93,10 +94,31 @@ BoardState Board::getBoardState() const
     return boardState;
 }
 
+std::vector<Position> Board::getWinPosition() const
+{
+    return winPosition;
+}
+
 void Board::checkBoardState()
 {
-    Field lookingFor = Field::O;
+    checkForSpecificPlayer(Field::O);
 
+    if (winPosition.size() > 0) {
+        boardState =  BoardState::Player1Win;
+        return;
+    }
+
+    checkForSpecificPlayer(Field::X);
+
+    if (winPosition.size() > 0) {
+        boardState =  BoardState::Player2Win;
+        return;
+    }
+
+}
+
+void Board::checkForSpecificPlayer(Field lookingFor)
+{
     //Iterate over all the positions
     for (int i = 0; i < sizeX * sizeY; ++i) {
         Position p = Position::TranslatePosition(i, sizeX, sizeY);
@@ -115,7 +137,11 @@ void Board::checkBoardState()
                 if (lookingFor != BoardData[Position::TranslatePosition(p2, sizeX, sizeY)])
                     break;
                 if (j == 4) {
-                    winPosition.push_back(p);
+                    for (int j = 0; j < 5; ++j) {
+                        Position p3 = p;
+                        p3.X += j;
+                        addWinPosition(p3);
+                    }
                 }
             }
         }
@@ -135,7 +161,12 @@ void Board::checkBoardState()
                 if (lookingFor != BoardData[Position::TranslatePosition(p2, sizeX, sizeY)])
                     break;
                 if (j == 4) {
-                    winPosition.push_back(p);
+                    for (int j = 0; j < 5; ++j) {
+                        Position p3 = p;
+                        p3.X += j;
+                        p3.Y += j;
+                        addWinPosition(p3);
+                    }
                 }
             }
         }
@@ -154,7 +185,11 @@ void Board::checkBoardState()
                 if (lookingFor != BoardData[Position::TranslatePosition(p2, sizeX, sizeY)])
                     break;
                 if (j == 4) {
-                    winPosition.push_back(p);
+                    for (int j = 0; j < 5; ++j) {
+                        Position p3 = p;
+                        p3.Y += j;
+                        addWinPosition(p3);
+                    }
                 }
             }
         }
@@ -174,14 +209,21 @@ void Board::checkBoardState()
                 if (lookingFor != BoardData[Position::TranslatePosition(p2, sizeX, sizeY)])
                     break;
                 if (j == 4) {
-                    winPosition.push_back(p);
+                    for (int j = 0; j < 5; ++j) {
+                        Position p3 = p;
+                        p3.X -= j;
+                        p3.Y += j;
+                        addWinPosition(p3);
+                    }
                 }
             }
         }
     }
+}
 
-    if (winPosition.size() > 0) {
-        boardState =  BoardState::Player1Win;
-    }
-
+void Board::addWinPosition(Position p)
+{
+    bool found = (std::find(winPosition.begin(), winPosition.end(), p) != winPosition.end());
+    if (!found)
+        winPosition.push_back(p);
 }

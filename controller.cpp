@@ -70,3 +70,8 @@ BoardState Controller::getBoardState() const
 {
     return board.getBoardState();
 }
+
+std::vector<Position> Controller::getWinPosition() const
+{
+    return board.getWinPosition();
+}
