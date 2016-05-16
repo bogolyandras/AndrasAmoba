@@ -12,10 +12,6 @@ MyAiPlayer::~MyAiPlayer()
 
 }
 
-void ReduceAttackSteps() {
-
-}
-
 Position MyAiPlayer::place(Field *board, int sizeX, int sizeY)
 {
     this->BoardData = board;
@@ -48,15 +44,27 @@ Position MyAiPlayer::place(Field *board, int sizeX, int sizeY)
         BoardData[i] = Field::Empty;
     }
 
+    ReduceAttackSteps(6);
+    ReduceDefenseSteps(5);
+    ReduceAttackSteps(5);
+    ReduceDefenseSteps(4);
+    ReduceAttackSteps(4);
+    ReduceDefenseSteps(3);
+    ReduceAttackSteps(3);
+    ReduceDefenseSteps(2);
+    ReduceAttackSteps(2);
+    ReduceDefenseSteps(1);
+    ReduceAttackSteps(1);
+
     return PlacementAdvantages.at(0).position;
 }
 
 Threat MyAiPlayer::getThreatForPlayer(Field lookingFor)
 {
-    unsigned char PossibilitiesRight[sizeX * sizeY];
-    unsigned char PossibilitiesRightBottom[sizeX * sizeY];
-    unsigned char PossibilitiesBottom[sizeX * sizeY];
-    unsigned char PossibilitiesLeftBottom[sizeX * sizeY];
+    int PossibilitiesRight[sizeX * sizeY];
+    int PossibilitiesRightBottom[sizeX * sizeY];
+    int PossibilitiesBottom[sizeX * sizeY];
+    int PossibilitiesLeftBottom[sizeX * sizeY];
 
     for (int i = 0; i < sizeX * sizeY; ++i) {
         Position p = Position::TranslatePosition(i, sizeX, sizeY);
@@ -69,8 +77,8 @@ Threat MyAiPlayer::getThreatForPlayer(Field lookingFor)
          *
          */
         PossibilitiesRight[i] = 0;
-        if (p.X + 4 <= sizeX) {
-            unsigned char ThreatCount = 1;
+        if (p.X + 5 <= sizeX) {
+            int ThreatCount = 1;
             for (int j = 0; j < 5; ++j) {
                 Position p2 = p;
                 p2.X += j;
@@ -93,8 +101,8 @@ Threat MyAiPlayer::getThreatForPlayer(Field lookingFor)
          *     X
          */
         PossibilitiesRightBottom[i] = 0;
-        if (p.X + 4 <= sizeX && p.Y + 4 <= sizeY) {
-            unsigned char ThreatCount = 1;
+        if (p.X + 5 <= sizeX && p.Y + 5 <= sizeY) {
+            int ThreatCount = 1;
             for (int j = 0; j < 5; ++j) {
                 Position p2 = p;
                 p2.X += j;
@@ -106,8 +114,8 @@ Threat MyAiPlayer::getThreatForPlayer(Field lookingFor)
                     ThreatCount = 0;
                     break;
                 }
-                PossibilitiesRightBottom[i] = ThreatCount;
             }
+            PossibilitiesRightBottom[i] = ThreatCount;
         }
 
         /*
@@ -118,8 +126,8 @@ Threat MyAiPlayer::getThreatForPlayer(Field lookingFor)
          * X
          */
         PossibilitiesBottom[i] = 0;
-        if (p.Y + 4 <= sizeY) {
-            unsigned char ThreatCount = 1;
+        if (p.Y + 5 <= sizeY) {
+            int ThreatCount = 1;
             for (int j = 0; j < 5; ++j) {
                 Position p2 = p;
                 p2.Y += j;
@@ -130,8 +138,8 @@ Threat MyAiPlayer::getThreatForPlayer(Field lookingFor)
                     ThreatCount = 0;
                     break;
                 }
-                PossibilitiesBottom[i] = ThreatCount;
             }
+            PossibilitiesBottom[i] = ThreatCount;
         }
 
         /*
@@ -142,8 +150,8 @@ Threat MyAiPlayer::getThreatForPlayer(Field lookingFor)
          * X
          */
         PossibilitiesLeftBottom[i] = 0;
-        if (p.X - 4 >= 0 && p.Y + 4 <= sizeY) {
-            unsigned char ThreatCount = 1;
+        if (p.X - 4 >= 0 && p.Y + 5 <= sizeY) {
+            int ThreatCount = 1;
             for (int j = 0; j < 5; ++j) {
                 Position p2 = p;
                 p2.X -= j;
@@ -155,8 +163,8 @@ Threat MyAiPlayer::getThreatForPlayer(Field lookingFor)
                     ThreatCount = 0;
                     break;
                 }
-                PossibilitiesLeftBottom[i] = ThreatCount;
             }
+            PossibilitiesLeftBottom[i] = ThreatCount;
         }
     }
 
@@ -230,4 +238,90 @@ Threat MyAiPlayer::getThreatForPlayer(Field lookingFor)
     }
 
     return threats;
+}
+
+void MyAiPlayer::ReduceAttackSteps(unsigned char level)
+{
+    int Max = 0;
+    for (std::vector<Advantage>::iterator it = PlacementAdvantages.begin(); it != PlacementAdvantages.end(); ++it) {
+        if(level == 6) {
+            if ((*it).PlayerThreatIncrease.Threat5 > Max)
+                Max = (*it).PlayerThreatIncrease.Threat5;
+        } else if(level == 5) {
+            if ((*it).PlayerThreatIncrease.Threat4 > Max)
+                Max = (*it).PlayerThreatIncrease.Threat4;
+        } else if(level == 4) {
+            if ((*it).PlayerThreatIncrease.Threat3 > Max)
+                Max = (*it).PlayerThreatIncrease.Threat3;
+        } else if(level == 3) {
+            if ((*it).PlayerThreatIncrease.Threat2 > Max)
+                Max = (*it).PlayerThreatIncrease.Threat2;
+        } else if(level == 2) {
+            if ((*it).PlayerThreatIncrease.Threat1 > Max)
+                Max = (*it).PlayerThreatIncrease.Threat1;
+        } else if(level == 1) {
+            if ((*it).PlayerThreatIncrease.Threat0 > Max)
+                Max = (*it).PlayerThreatIncrease.Threat0;
+        }
+    }
+
+    if (Max == 0)
+        return;
+
+    for (std::vector<Advantage>::iterator it = PlacementAdvantages.begin(); it != PlacementAdvantages.end();) {
+      if (    (level == 6 && (*it).PlayerThreatIncrease.Threat5 < Max) ||
+              (level == 5 && (*it).PlayerThreatIncrease.Threat4 < Max) ||
+              (level == 4 && (*it).PlayerThreatIncrease.Threat3 < Max) ||
+              (level == 3 && (*it).PlayerThreatIncrease.Threat2 < Max) ||
+              (level == 2 && (*it).PlayerThreatIncrease.Threat1 < Max) ||
+              (level == 1 && (*it).PlayerThreatIncrease.Threat0 < Max)
+            ) {
+        it = PlacementAdvantages.erase(it);
+      } else {
+        ++it;
+      }
+    }
+}
+
+void MyAiPlayer::ReduceDefenseSteps(unsigned char level)
+{
+    int Max = 0;
+    for (std::vector<Advantage>::iterator it = PlacementAdvantages.begin(); it != PlacementAdvantages.end(); ++it) {
+        if(level == 6) {
+            if ((*it).OpponentThreatDecrease.Threat5 > Max)
+                Max = (*it).OpponentThreatDecrease.Threat5;
+        } else if(level == 5) {
+            if ((*it).OpponentThreatDecrease.Threat4 > Max)
+                Max = (*it).OpponentThreatDecrease.Threat4;
+        } else if(level == 4) {
+            if ((*it).OpponentThreatDecrease.Threat3 > Max)
+                Max = (*it).OpponentThreatDecrease.Threat3;
+        } else if(level == 3) {
+            if ((*it).OpponentThreatDecrease.Threat2 > Max)
+                Max = (*it).OpponentThreatDecrease.Threat2;
+        } else if(level == 2) {
+            if ((*it).OpponentThreatDecrease.Threat1 > Max)
+                Max = (*it).OpponentThreatDecrease.Threat1;
+        } else if(level == 1) {
+            if ((*it).OpponentThreatDecrease.Threat0 > Max)
+                Max = (*it).OpponentThreatDecrease.Threat0;
+        }
+    }
+
+    if (Max == 0)
+        return;
+
+    for (std::vector<Advantage>::iterator it = PlacementAdvantages.begin(); it != PlacementAdvantages.end();) {
+      if (    (level == 6 && (*it).OpponentThreatDecrease.Threat5 < Max) ||
+              (level == 5 && (*it).OpponentThreatDecrease.Threat4 < Max) ||
+              (level == 4 && (*it).OpponentThreatDecrease.Threat3 < Max) ||
+              (level == 3 && (*it).OpponentThreatDecrease.Threat2 < Max) ||
+              (level == 2 && (*it).OpponentThreatDecrease.Threat1 < Max) ||
+              (level == 1 && (*it).OpponentThreatDecrease.Threat0 < Max)
+            ) {
+        it = PlacementAdvantages.erase(it);
+      } else {
+        ++it;
+      }
+    }
 }

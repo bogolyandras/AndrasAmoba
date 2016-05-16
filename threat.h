@@ -12,8 +12,6 @@ public:
     int Threat3;
     int Threat4;
     int Threat5;
-    Threat &operator+=(const Threat &otherThreat);
-    Threat &operator-=(const Threat &otherThreat);
     Threat operator+(const Threat &otherThreat) const;
     Threat operator-(const Threat &otherThreat) const;
 };

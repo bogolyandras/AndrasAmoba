@@ -15,6 +15,8 @@ private:
     Field* BoardData;
     Threat getThreatForPlayer(Field playerField);
     std::vector<Advantage> PlacementAdvantages;
+    void ReduceAttackSteps(unsigned char level);
+    void ReduceDefenseSteps(unsigned char level);
 };
 
 #endif // MYAIPLAYER_H
