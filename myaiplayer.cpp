@@ -1,4 +1,5 @@
 #include <vector>
+#include <cstdlib>
 #include "myaiplayer.h"
 
 
@@ -56,7 +57,7 @@ Position MyAiPlayer::place(Field *board, int sizeX, int sizeY)
     ReduceDefenseSteps(1);
     ReduceAttackSteps(1);
 
-    return PlacementAdvantages.at(0).position;
+    return PlacementAdvantages.at(std::rand()%PlacementAdvantages.size()).position;
 }
 
 Threat MyAiPlayer::getThreatForPlayer(Field lookingFor)
