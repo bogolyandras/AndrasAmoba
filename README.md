@@ -1,5 +1,7 @@
 # AndrasAmoba
 
+![Screenshot of the game](https://github.com/SZE-ProgCpp-2016-Spring/AndrasAmoba/blob/master/Screenshot.png)
+
 ## Windows binaries
 Works on Windows XP and above
 
